@@ -93,7 +93,7 @@ def extract_signal(signal, boundaries):
         end_point = boundaries[21]    
     
     extract_signal1 = signal[start_point*10:end_point*10]
-    return extract_signal1、
+    return extract_signal1
 
 def file_uploaded_callback():
     st.session_state.denoise_y = None
