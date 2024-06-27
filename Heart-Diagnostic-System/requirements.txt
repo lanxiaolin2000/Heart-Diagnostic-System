@@ -1,0 +1,7 @@
+streamlit
+torch
+librosa
+scipy.signal
+numpy
+pandas
+math
