@@ -149,7 +149,7 @@ with row[2]:
         
             st.session_state.segment_y = st.session_state.segment_y/np.max(np.abs(st.session_state.segment_y))
 
-            device = torch.device("cpu")
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
             sequence_len=625 # sequence length of time series
             max_len=5000 # max time series sequence length 
             n_head = 8 # number of attention head
@@ -161,7 +161,7 @@ with row[2]:
 
             model = CNNTransformerModel(transformer).to(device=device)
 
-            model.load_state_dict(torch.load('Heart-Diagnostic-System/myModel'),map_location=torch.device('cpu')) 
+            model.load_state_dict(torch.load('Heart-Diagnostic-System/myModel'),map_location=device) 
             model.eval()
             input_tensor = torch.tensor(st.session_state.segment_y, dtype=torch.float32).to(device)
             input_tensor = input_tensor.unsqueeze(0).unsqueeze(2)  # 变为 [1, 5000, 1]
