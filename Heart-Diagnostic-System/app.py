@@ -110,7 +110,7 @@ uploaded_file = st.file_uploader("upload your audio file", type=['wav'])
 st.write('(Minimum 10 seconds)')
 if uploaded_file is not None:
     y, sr = librosa.load(uploaded_file, sr=1000)
-    st.session_state.uploaded_file = uploaded_file
+    st.session_state.uploaded_file = y
     st.line_chart(data=y)
 row = st.columns(3)
 row1 = st.columns(2)
