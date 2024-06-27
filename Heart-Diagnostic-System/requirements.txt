@@ -1,7 +1,7 @@
 streamlit
 torch
 librosa
-scipy.signal
+scipy
 numpy
 pandas
 math
