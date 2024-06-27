@@ -135,6 +135,8 @@ with row[1]:
             boundaries, _ = boundaries_function(st.session_state.denoise_y)
             st.session_state.segment_y = extract_signal(st.session_state.denoise_y, boundaries)
             segmentation_placeholder.line_chart(data=st.session_state.segment_y)
+            device1 = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+            st.write(device1)
         else:
             st.write("Please perform denoising first.")
 
