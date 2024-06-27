@@ -157,13 +157,13 @@ with row[2]:
             drop_prob = 0.1
             d_model = 64 # number of dimension ( for positional embedding)
             ffn_hidden = 128 # size of hidden layer before classification 
-            transformer =  Transformer(  d_model=d_model, n_head=n_head, max_len=max_len, seq_len=sequence_len, ffn_hidden=ffn_hidden, n_layers=n_layer, drop_prob=drop_prob, details=False,device=device).to(device=device)
+            transformer =  Transformer(  d_model=d_model, n_head=n_head, max_len=max_len, seq_len=sequence_len, ffn_hidden=ffn_hidden, n_layers=n_layer, drop_prob=drop_prob, details=False,device=device).to(device="cpu")
 
-            model = CNNTransformerModel(transformer).to(device=device)
+            model = CNNTransformerModel(transformer).to(device="cpu")
 
-            model.load_state_dict(torch.load('Heart-Diagnostic-System/myModel'),map_location=device) 
+            model.load_state_dict(torch.load('Heart-Diagnostic-System/myModel'),map_location="cpu") 
             model.eval()
-            input_tensor = torch.tensor(st.session_state.segment_y, dtype=torch.float32).to(device)
+            input_tensor = torch.tensor(st.session_state.segment_y, dtype=torch.float32).to("cpu")
             input_tensor = input_tensor.unsqueeze(0).unsqueeze(2)  # 变为 [1, 5000, 1]
             assert input_tensor.shape == (1, 5000, 1), f"Expected input shape [1, 5000, 1], but got {input_tensor.shape}"
         
