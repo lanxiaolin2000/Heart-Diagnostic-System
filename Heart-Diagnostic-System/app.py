@@ -161,7 +161,7 @@ with row[2]:
 
             model = CNNTransformerModel(transformer).to(device=device)
 
-            model.load_state_dict(torch.load('Heart-Diagnostic-System/myModel')) 
+            model.load_state_dict(torch.load('Heart-Diagnostic-System/myModel'),map_location=torch.device('cpu')) 
             model.eval()
             input_tensor = torch.tensor(st.session_state.segment_y, dtype=torch.float32).to(device)
             input_tensor = input_tensor.unsqueeze(0).unsqueeze(2)  # 变为 [1, 5000, 1]
