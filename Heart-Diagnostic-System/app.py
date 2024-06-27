@@ -93,8 +93,13 @@ def extract_signal(signal, boundaries):
         end_point = boundaries[21]    
     
     extract_signal1 = signal[start_point*10:end_point*10]
-    return extract_signal1
+    return extract_signal1、
 
+def file_uploaded_callback():
+    st.session_state.denoise_y = None
+    st.session_state.segment_y = None
+    st.session_state.classification_result = ""
+    
 # 初始化session state
 if 'denoise_y' not in st.session_state:
     st.session_state.denoise_y = None
@@ -106,14 +111,13 @@ if 'classification_result' not in st.session_state:
     st.session_state.classification_result = ""
 
 st.title('Heart Diagnosis')
-uploaded_file = st.file_uploader("upload your audio file", type=['wav'])
+uploaded_file = st.file_uploader("upload your audio file", type=['wav'], on_change=file_uploaded_callback)
 st.write('(Minimum 10 seconds)')
 if uploaded_file is not None:
     y, sr = librosa.load(uploaded_file, sr=1000)
     st.session_state.uploaded_file = y
     st.line_chart(data=y)
 row = st.columns(3)
-row1 = st.columns(2)
 
 # 创建占位符
 denoise_placeholder = st.empty()
