@@ -149,7 +149,7 @@ with row[2]:
         
             st.session_state.segment_y = st.session_state.segment_y/np.max(np.abs(st.session_state.segment_y))
 
-            device = torch.device("cpu")
+            device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
             sequence_len=625 # sequence length of time series
             max_len=5000 # max time series sequence length 
             n_head = 8 # number of attention head
